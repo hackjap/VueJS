@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{num}}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data : {
+                num:10
+            },
+            // computed vs watch
+            // 공식문서 : https://vuejs.org/v2/guide/computed.html#ad
+            // 간단한 연산이라면 웬만하면 computed를 사용하는 것이 바람직하다.
+
+
+            // 기본적으로 데이터의 의존성
+            // 빠른 계산의 장점
+            // 간단한 로직
+            // 유효성 검사 등 `
+            computed: {
+                doubleNum:function(){
+                    return this.num * 2;
+                }
+            },
+            // computed와 비슷하지만
+            // 무거운 로직에 이용 
+            // 데이터 요청 , axios-
+            watch : {
+                // num : function(newValue,oldValue){
+                    num : function(newValue,oldValue){
+                    this.fetchUserByNumber(newValue);
+                }
+            },
+            methods:{
+                fetchUserByNumber:function(num){
+                    console.log(num);
+                    // axios.get(num);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

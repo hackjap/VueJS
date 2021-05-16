@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <button onclick="openPop();">open</button>
+    <button onclick="closePop();">close</button>
+
+    <script>
+        var i =0;
+        var windowIx = [];
+
+        function openPop(){
+            windowIx[i] =  window.open('http://www.naver.com');
+            i++;
+            //console.log(i);
+        }
+
+        function closePop(){
+            windowIx[i-1].close();
+            i--;
+            //console.log(i);
+        }
+        
+    </script>
+</body>
+</html>
