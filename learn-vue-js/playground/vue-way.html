@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        // vue의 reactivity
+        // object defineProperty() - mdn
+        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+        var div = document.querySelector('#app');
+        var viewModel = {};
+
+        // // 객체의(특성) 동작의 재정의
+        // Object.defineProperty(대상 객체, 객체의 속성,{
+        //     정의할 내용
+        // });   
+     
+        // 이게바로 뷰의 핵심 reactivity(반응성)
+        // 데이터의 변화를 라이브러리에서 감지해서 
+        // 알아서 화면을 자동으로 그려주는 reactivity -> data binding
+
+         // [ Reactivity 코드 라이브러리화 하기 ]
+
+        (function(){    // 즉시 실행함수로 주요 코드가 노출되지 않게 한번 더 감싸서 실행
+            function init(){
+            Object.defineProperty(viewModel,'str',{
+            // 속성에 접근했을 떄의 동작을 정의
+            get:function(){
+                console.log('접근');
+            },
+            // 속성에 값을 할당했을 떄의 동작을 정의
+            set:function(newValue){
+                console.log('할당');
+               render(newValue);
+            }
+            });
+        }
+        
+        function render(value){
+            div.innerHTML = value;
+        }
+       
+        init();
+        })();
+        
+   
+
+    </script>
+</body>
+</html>
