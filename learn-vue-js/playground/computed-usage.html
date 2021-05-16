@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .warning{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- isError의 boolean 값에 따라 실행여부가 바뀜 -->
+        <!-- <p v-bind:class="{warning:isError}">Hello</p> -->
+        <p v-bind:class="errorTextColor">Hello</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el : '#app',
+            data:{
+                // cname : 'blue-text',
+                isError : false
+            },
+            computed:{
+                errorTextColor:function(){
+                    return this.isError ? 'warning' : null;
+                    // computed에서 데이터 속성을 불러올떄는 this를 잊지말자 !
+                }
+            }
+        });
+    </script>
+</body>
+</html>
