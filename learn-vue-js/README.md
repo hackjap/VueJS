@@ -36,3 +36,34 @@ Vue 생태계 관련 내용들을 읽어보면서 구현을 해보자.
 Vuex
 Vue Router
 Vue Cli
+
+## CSS Grammer
+
+[ flex ]
+MDN flex : https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox
+flexbox game : https://flexboxfroggy.com/#ko
+
+flex
+
+- container
+- items
+- main axis(중심축)
+- cross axis
+
+flex-direcition : row;
+flex-wrap:nowrap;
+flex-flex : column nowrap;
+
+/_ main axis 중심축 _/
+justify-content:space-between;'
+
+/_ 반대축 _ /
+align-items:center;
+basline
+align-content :
+
+/_ item property _ /
+flex-grow : 1 ( weight와 비슷한 개념 )
+flex-shrink : 1 //
+flex-basis : auto(기본 값) | 60 % // 아이템의 기본 비율을 조정
+align-self : center // 아이템 하나의 위치를 배치
