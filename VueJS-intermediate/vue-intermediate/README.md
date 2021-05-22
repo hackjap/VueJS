@@ -28,3 +28,7 @@ v-bind:class="{클래스명 : 체크 값"}
 - created
 
 scoped : 해당 컴포넌트에만 스타일 적용
+
+
+# 사이트
+https://fontawesome.com/icons/check?style=solid 아이콘 
