@@ -602,37 +602,65 @@ Store에 있는 아래 4가지 속성들을 간편하게 코딩하는 방법
 
 - 컴포넌트의 메서드명과 뮤테이션 명이 같을 경우 배열로 , 다를 경우 객체로 연결
 
-## 프로젝트 구조화와 모듈화 방법
+## 프로젝트 구조화와 모듈화
+
+### 프로젝트 구조화와 모듈화 방법 1
 
 ---
 
 - 아래와 같은 store 구조를 어떻게 모듈화 할 수 있을까?
 
-  // store.js
-  import Vue from 'vue'
-  import Vuex from 'vuex'
+        // store.js
+        import Vue from 'vue'
+        import Vuex from 'vuex'
 
-  export const sotre = new Vuex.Store({
-  state : {},
-  getters : {}.
-  mutations : {},
-  actions : {}
-  });
-  // 힌트! Vuex.Store({})의 속성을 모듈로 연결
+        export const sotre = new Vuex.Store({
+        state : {},
+        getters : {}.
+        mutations : {},
+        actions : {}
+        });
+        // 힌트! Vuex.Store({})의 속성을 모듈로 연결
 
-  | ES6의 Import & Export를 이용하여 속성별로 모듈화
-  import Vue from 'vue'
-  import Vuex from 'vuex'
-  import _ as getters from 'store/getter.js'
-  import _ as mutations from 'store/mutations.js'
-  import \* as actions from 'store/actions.js'
+        | ES6의 Import & Export를 이용하여 속성별로 모듈화
+        import Vue from 'vue'
+        import Vuex from 'vuex'
+        import * as getters from 'store/getter.js'
+        import * as mutations from 'store/mutations.js'
+        import * as actions from 'store/actions.js'
 
-  export const sotre = new Vuex.Store({
-  state : {},
-  getters : getters,
-  mutations : mutations,
-  actions : actions
-  });
+        export const sotre = new Vuex.Store({
+        state : {},
+        getters : getters,
+        mutations : mutations,
+        actions : actions
+        });
+
+## 프로젝트 구조화와 모듈화 방법 2
+
+- 앱이 비대해져서 1개의 store로는 관리가 힘들 떄 mudules 속성 사용
+
+        // store.js
+        import Vue from 'vue'
+        import Vuex from 'vuex'
+        import todo from 'modules/todo.js'
+
+        export const store = new Vuex.Store({
+            modules : {
+                moduleA : todo, // 모듈 명칭 : 모듈 파일명
+                todo // todo:todo
+            }
+        })
+
+        // todo.js
+        const state = {}
+        const getters = {}
+        const mutations = {}
+        const actions = {}
+
+| export default의 차이?
+
+        default는 한개의 파일에서 하나만 추출되는 것을 의미
 
   <br/>
 
