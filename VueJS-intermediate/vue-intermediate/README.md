@@ -31,14 +31,17 @@
 
 ## Vue.js로 구현하는 TodoApp
 
-    | 리펙토링
-        - 컴포넌트의 html 루트 요소는 한 개이어야 함
-        - app.vue 에서 데이터를 관리하고 나머지 컴포넌트에서는 최소한의 기능만 제공 ( 중앙집권화)
-        - 데이터를 효율적으로 사용하고 데이터 동기화에 적절함
-    | 사용자 경험 개선
-        - modal components 등록
-            - slot : 특정 컴포넌트의 일부 UI들을 재사용 할 수 있는 기능
-            - transition : vue 프레임워크의 수많은 트렌지션 클래스 제공 ( transition group, list)
+| 리펙토링
+
+- 컴포넌트의 html 루트 요소는 한 개이어야 함
+- app.vue 에서 데이터를 관리하고 나머지 컴포넌트에서는 최소한의 기능만 제공 ( 중앙집권화)
+- 데이터를 효율적으로 사용하고 데이터 동기화에 적절함
+
+| 사용자 경험 개선
+
+- modal components 등록
+  - slot : 특정 컴포넌트의 일부 UI들을 재사용 할 수 있는 기능
+  - transition : vue 프레임워크의 수많은 트렌지션 클래스 제공 ( transition group, list)
 
 <br/>
 
@@ -459,6 +462,177 @@
 
 - 언제 어느 컴포넌트에서 해당 state를 호출하고, 변경했는지 확인하기가 어려움
 - 결론 : state 값의 변화를 추적하기 어렵기 때문에 mutations 속성에는 동기 처리 로직만 넣어야 한다.
+
+## 각 속성들을 더 쉽게 사용하는 방법 - Helper
+
+Store에 있는 아래 4가지 속성들을 간편하게 코딩하는 방법
+
+- state -> mapState
+- getters -> mapGetters
+- mutations -> mapMutations
+- actions -> mapActions
+
+### 헬퍼의 사용법
+
+- 헬퍼를 사용하고자 하는 vue파일에서 아래와 같이 해당 헬퍼를 코딩
+
+        //App.vue
+        import{mapState} from 'vuex'
+        import{mapGetters} from 'vuex'
+        import{mapMutations} from 'vuex'
+        import{mapActions from 'vuex'
+
+        export default {
+        computed() { ... mapState(['num']), ...mapGetters(['countedNum']) },
+        methods : { ...mapMutations(['clickBtn']), ...mapActions(['asyncClickBtn']) }
+        }
+
+- ' ... ' 는 ES6의 Object Spread Operator
+  let josh = {
+  field: 'web',
+  language: 'js'
+  };
+  let developer = {
+  nation:'korea',
+  ...josh
+  };
+
+        console.log(developer);
+
+### mapState
+
+- Vuex에 선언한 state 속성을 뷰 컴포넌트에 더 쉽게 연결해주는 헬퍼
+
+  //App.vue
+  import { mapState } from 'vuex'
+
+  computed(){
+  ...mapState(['num'])
+  // num() { return this.$store.state.num;}
+  }
+
+  // store.js
+  state : {
+  num : 10
+  }
+
+    <!-- <p>{{ this.$store.state.num }} </p>  -->
+    <p> {{this.num}} </p>
+
+### mapGetters
+
+- Vuex에 선언한 getter 속성을 뷰 컴포넌트에 더 쉽게 연결해주는 헬퍼
+
+         // App.vue
+        import { mapGetters } from 'vuex'
+
+        computed() { ...mapGetters(['reverseMessage'])}
+
+        // store.js
+        getters : {
+            reverseMesage(state){
+                return  state.msg.split('').reverse().join(');
+            }
+        }
+
+        <!-- <p>{{ this.$store.getters.reverseMessage }}</p> -->
+        <p> {{ this.reverseMessage }} </p>
+
+- Spread Operator를 사용하는 이유는 기존의 컴포넌트의 존재하는 cumputed 속성과 mapGetter를 함께 사용하기 위해서이다.
+
+| 뷰에서 권고하는 스타일 가이드
+
+    - 템플릿안에서는 최대한 깔끔하게 정의하고 필요한 연산들은 스크립트 안(컴포넌트의 내부로직)에서 함
+
+### mapMutations
+
+- Vuex에서 선언한 mutations 속성을 뷰 컴포넌트애 더 쉽게 연결해주는 헬퍼
+
+        // App.vue
+        methods: {
+            ...mapMutations(['clickBtn']),
+            authLogin(){},
+            displayTable(){}
+        }
+
+        // store.js
+        mutations : {
+            clickBtn(state){
+                alert(state.msg);
+            }
+        }
+
+        <button @click="clickBtn">popup message </button>
+
+### mapActions
+
+- Vuex에 선언한 actions 속성을 뷰 컴포넌트에 더 쉽게 연결해주는 헬퍼
+  //App.vue
+  import { mapActions } from 'vuex'
+
+        methods : {
+            ...mapActions(['delayChickBtn']),
+        }
+
+        // store.js
+        actions : {
+            delayClickBtn(context){
+                setTimeout(() => context.commit('clickBtn'),2000)
+            }
+        }
+
+        <button @click="delayClickBtn"> deloay popop message </button>
+
+### 헬퍼의 유연한 문법
+
+- Vuex에 선언된 속성을 그대로 컴포넌트에 연결하는 문법
+
+        // 배열 리터럴
+        ... mapMutations([
+            'clickBtn', // 'clickBtn' : clickBtn
+            'addNumber' // addNumber(인자)
+        ])
+
+- Vuex에 선언한 속성을 컴포넌트의 특정 메서드에다가 연결하는 문법
+
+        // 객체 리터럴
+        ... mapMutatinos({
+            popMsg : 'clickBtn' // 컴포넌트 메서드 명 : Store의 뮤테이션 명
+        })
+
+- 컴포넌트의 메서드명과 뮤테이션 명이 같을 경우 배열로 , 다를 경우 객체로 연결
+
+## 프로젝트 구조화와 모듈화 방법
+
+---
+
+- 아래와 같은 store 구조를 어떻게 모듈화 할 수 있을까?
+
+  // store.js
+  import Vue from 'vue'
+  import Vuex from 'vuex'
+
+  export const sotre = new Vuex.Store({
+  state : {},
+  getters : {}.
+  mutations : {},
+  actions : {}
+  });
+  // 힌트! Vuex.Store({})의 속성을 모듈로 연결
+
+  | ES6의 Import & Export를 이용하여 속성별로 모듈화
+  import Vue from 'vue'
+  import Vuex from 'vuex'
+  import _ as getters from 'store/getter.js'
+  import _ as mutations from 'store/mutations.js'
+  import \* as actions from 'store/actions.js'
+
+  export const sotre = new Vuex.Store({
+  state : {},
+  getters : getters,
+  mutations : mutations,
+  actions : actions
+  });
 
   <br/>
 
