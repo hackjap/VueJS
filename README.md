@@ -672,6 +672,8 @@ Store에 있는 아래 4가지 속성들을 간편하게 코딩하는 방법
 
 ### vue CLI
 
+    npm install -g @vue/cli : vue cli 설치
+
     cd vue-todo
     npm run serve
     vue create vue-todo : vue cli 프로젝트 생성
