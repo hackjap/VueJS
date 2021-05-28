@@ -1,9 +1,28 @@
-node -v
-npm init
-npm init -y
-npm install jquery
-npm install gulp
-npm uninstall gulp
-npm install gulp --global
+node -v : node version 확인 
+
+npm init : npm 초기화 
+
+npm init -y : npm 생성 시 기본 값으로 바로 생성 
+
+npm install jquery :  jquery 라이브러리 설치 (package.json에서 버전도 확인 가능 )
+
+npm install gulp : gulp 라이브러리 설치(지역설치)
+     - 해당위치에 node_modules라는 폴더와 폴더 하위에 라이브러리 파일 생성 
+     - --save-prod(기본 값) - 배포용 라이브러리
+     - --save-dev - 개발용 라이브러리
+
+npm uninstall gulp : gulp 삭제 
+
+npm install gulp --global : 전역으로 라이브러리 설치 
+    - 전역 설치( 경로 : %USERPROFILE%\AppData\Roaming\npm\node_modules(window) 에 파일 생성  )
+    - 보통 cli 환경에서 라이브러리 명령어를 사용하기 위해 설치
+
 npm install vue --save-dev
-npm i vue -D
+    npm i vue -D 로 축약 가능
+
+
+npm init -y
+npm i webpack webpack-cli -D 
+npm i lodash : 자바스크립트 유틸리티 라이브러리 설치 
+npm run build
+    
