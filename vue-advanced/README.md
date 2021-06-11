@@ -52,3 +52,8 @@ js는 전역을 scoped로 한다.
 created(){
     this.$store.dispatch('');
 }
+
+
+### 데이터 처리 흐름 
+1. computed ( vuex )
+2. props 
