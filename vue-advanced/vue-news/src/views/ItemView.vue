@@ -23,11 +23,6 @@
         <!-- {{fetchedItem.content}} -->
       </div>
     </section>
-
-    <!-- <p>{{ fetchedItem.title }}</p>
-    <div>
-      {{ fetchedItem.content }}
-    </div> -->
   </div>
 </template>
 
