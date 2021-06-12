@@ -57,3 +57,40 @@ created(){
 ### 데이터 처리 흐름 
 1. computed ( vuex )
 2. props 
+
+### export defualt 차이
+
+        // bus.js
+        export const bus  = new Vue();
+
+        //App.vue
+        import {bus} from './bus.js';
+
+        // bus.js 
+        export default new Vue();
+        //App.vue
+        import Bus from './bus.js';
+
+
+### 컴포넌트의 코드마저 재사용하는 하이오더 컴포넌트
+
+- 리액트의 하이오더 컴포넌트에서 기원
+- 컴포넌트의 로직을 재사용하는 기술
+
+
+### Mixsins
+
+- 믹스인은 여러 컴포넌트 간에 공통으로 사용하고 있는 로직, 기능들을 재사용하는 방법
+- 믹스인에 정의할 수 있는 재사용 로직은
+data, methods, created 등과 같은 컴포넌 트 옵션 
+
+    
+        // mixin
+        export default {
+            // 재사용할 컴포넌트 옵션 & 로직 
+        }
+        // hoc
+        export default  function create(){
+            // 재사용할 컴포넌트 옵션
+            
+        }
