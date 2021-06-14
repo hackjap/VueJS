@@ -105,3 +105,27 @@ data, methods, created 등과 같은 컴포넌 트 옵션
 
 
 
+### async_await 
+ 
+ 형식
+ async + 함수
+ await + 프로미스 객체 
+
+         async loginUser1() {
+        try {
+          var response = await axios.get('https://jsonplaceholder.typicode.com/users/1');
+          if (response.data.id === 1) {
+            console.log("사용자가 인증되었습니다.");
+            var list = await axios.get('https://jsonplaceholder.typicode.com/users/1/todos');
+            this.items = list.data;
+          }
+        } catch (error) {
+          console.log(error);
+          handleException(error); // 예외처리 함수 
+
+        }
+
+      },
+
+async_await 에서 예외처리는
+try-catch 문으로함 ( 네트워크 오류뿐만아니라 다양한 예외처리를 할 수 있음)

@@ -68,6 +68,7 @@ export const router = new VueRouter({
             },
 
         },
+        
         {
             path: '/jobs',
             name: 'jobs',
