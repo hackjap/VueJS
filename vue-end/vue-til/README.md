@@ -62,7 +62,7 @@ eslint settings > eslint validate > package.json
 ## 에플리케이션 코딩 컨벤션 및 뷰 스타일 가이드 소개
 
     vue style 가이드 문서 
-    https://www.color-hex.com/color-palettes/popular.php
+    https://www.color-hex.com/color-palettes/popular.phpㄴ
 
 
 ## 화면 구성 
@@ -110,3 +110,10 @@ eslint settings > eslint validate > package.json
                 },
             ],
         });
+
+
+## 회원가입 페이지 개발 
+
+- async await  : https://joshua1988.github.io/web-development/javascript/js-async-await/
+- es6 템플릿 리터럴(백틱) : https://joshua1988.github.io/es6-online-book/template-literal.html
+- Destructuring : https://joshua1988.github.io/es6-online-book/destructuring.html
