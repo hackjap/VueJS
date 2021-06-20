@@ -63,3 +63,50 @@ eslint settings > eslint validate > package.json
 
     vue style 가이드 문서 
     https://www.color-hex.com/color-palettes/popular.php
+
+
+## 화면 구성 
+로그인
+회원 가입
+메인 
+추가 / 수정
+
+
+## 코드 스플릿팅 
+	routes: [
+		// {
+		// 	path: '/signup',
+		// 	component: (SignupPage),
+		// },
+		{
+			path: '/login',
+			component: () => import('@/views/LoginPage.vue'),
+		},
+
+## vue router
+    - redirect
+    - callback 
+    - history mode 
+        production 배포 시 주의사항 : https://router.vuejs.org/guide/essentials/history-mode.html
+  
+        export default new VueRouter({
+            mode: 'history',
+            routes: [
+                {
+                    path: '/',
+                    redirect: '/login',
+                },
+                {
+                    path: '/login',
+                    component: () => import('@/views/LoginPage.vue'),
+                },
+                {
+                    path: '/signup',
+                    component: () => import('@/views/SignupPage.vue'),
+                },
+                {
+                    path: '*',
+                    component: () => import('@/views/NotFoundPage.vue'),
+                },
+            ],
+        });
