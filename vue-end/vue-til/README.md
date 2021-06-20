@@ -119,9 +119,9 @@ eslint settings > eslint validate > package.json
 - Destructuring : https://joshua1988.github.io/es6-online-book/destructuring.html
 
 
-## 실무 환경을 위한 프로젝트 설정
+# 실무 환경을 위한 프로젝트 설정
 
-### API 설정 공통화 
+## API 설정 공통화 
 
     const instance = axios.create({
         baseURL: 'http://localhost:3000/',
@@ -134,7 +134,7 @@ eslint settings > eslint validate > package.json
     }
 
 
-### env 파일과 설정 방법
+## env 파일과 설정 방법
     // .env
     VUE_APP_API_URL=http://localhost:3000/
 
@@ -145,3 +145,131 @@ eslint settings > eslint validate > package.json
 
     vue cli env 파일 규칙 문서 
     https://cli.vuejs.org/guide/mode-and-env.html#modes
+
+# 로그인 페이지 개발 
+
+## 로그인 에러처리 
+async-wait의 try-catch 문을 이용
+    methods: {
+		async submitForm() {
+			try {
+				// 비즈니스 로직
+				const userData = {
+					username: this.username,
+					password: this.password,
+				};
+				const { data } = await loginUser(userData);
+				console.log(data.user.username);
+				this.logMessage = `${data.user.username} 님 환영합니다`;
+				// this.initForm();
+			} catch (error) {
+				// 에러 핸들링할 코드
+				console.log(error.response.data);
+				this.logMessage = error.response.data;
+				// this.initForm();
+			} finally {
+				this.initForm();
+			}
+		},
+		initForm() {
+			this.username = '';
+			this.password = '';
+		},
+	},
+
+## 사용자 폼 유효성 검사
+
+    // src/utils/validate.js
+        function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+    export { validateEmail };
+
+    // .vue
+    computed: {
+		isUsernameValid() {
+			return validateEmail(this.username);
+		},
+	},
+
+    <button
+        :disabled="!isUsernameValid || !password"
+        type="submit"
+        class="btn"
+	>
+
+
+# 로그인 상태 관리와 스토어 
+
+## Programmatic Navigation 
+- 공식문서 : https://router.vuejs.org/guide/essentials/navigation.html#programmatic-navigation
+
+        // submitFrom()
+    	this.$router.push('/main');
+
+## 컴포넌트 간 데이터 전달 방법 3가지 ( 로그인 이후 동작 )
+LoginFrom -> AppHeader
+1. event -> event -> props
+2. event bus
+3. store (vuex)
+
+## 스토어 구현 
+
+    npm vuex : vuex 설치
+    
+    src / store / index.js 생성
+
+    // index.js
+    import Vue from 'vue';
+    import Vuex from 'vuex';
+
+    Vue.use(Vuex);
+
+    export default new Vuex.Store({
+	state: {
+		username: '',
+	},
+    });
+
+    // main.js
+    import Vue from 'vue';
+    import App from './App.vue';
+    import router from '@/routes/index';
+    import store from '@/store/index';
+
+    Vue.config.productionTip = false;
+
+    new Vue({
+        render: h => h(App),
+        router,
+        store,s
+    }).$mount('#app');
+
+
+## 로그아웃 기능 
+
+    // store/index.js
+    getters: {
+		// comupted와 유사
+		isLogin(state) {
+			// 로그인 된 경우
+			return state.username !== '';
+		},
+	},
+	mutations: {
+		setUsername(state, username) {
+			state.username = username;
+		},
+		clearUsername(state) {
+			state.username = '';
+		},
+	},
+    
+    //AppHeader.vue
+    methods: {
+		logoutUser() {
+			this.$store.commit('clearUsername');
+			this.$router.push('/login');
+		},
+	},
