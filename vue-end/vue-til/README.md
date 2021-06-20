@@ -273,3 +273,12 @@ LoginFrom -> AppHeader
 			this.$router.push('/login');
 		},
 	},
+    ㄹ
+
+# 토큰을 이용한 API 인증 처리 
+
+- Json Web 토큰 문서  : https://jwt.io/
+
+## 엑시오스 인터셉터 
+
+- 엑시오스 인터셉터 문서 : https://github.com/axios/axios#interceptors
