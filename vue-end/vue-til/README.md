@@ -142,3 +142,6 @@ eslint settings > eslint validate > package.json
     const instance = axios.create({
 	baseURL: process.env.VUE_APP_API_URL,
     });
+
+    vue cli env 파일 규칙 문서 
+    https://cli.vuejs.org/guide/mode-and-env.html#modes
