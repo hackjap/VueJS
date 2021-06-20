@@ -117,3 +117,28 @@ eslint settings > eslint validate > package.json
 - async await  : https://joshua1988.github.io/web-development/javascript/js-async-await/
 - es6 템플릿 리터럴(백틱) : https://joshua1988.github.io/es6-online-book/template-literal.html
 - Destructuring : https://joshua1988.github.io/es6-online-book/destructuring.html
+
+
+## 실무 환경을 위한 프로젝트 설정
+
+### API 설정 공통화 
+
+    const instance = axios.create({
+        baseURL: 'http://localhost:3000/',
+    });
+
+    function registerUser(userData) {
+        // const url = 'http://localhost:3000/signup';
+        // return axios.post(url, userData);
+        return instance.post('signup', userData);
+    }
+
+
+### env 파일과 설정 방법
+    // .env
+    VUE_APP_API_URL=http://localhost:3000/
+
+    // index.js
+    const instance = axios.create({
+	baseURL: process.env.VUE_APP_API_URL,
+    });
