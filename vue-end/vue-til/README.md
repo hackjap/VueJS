@@ -177,6 +177,7 @@ async-wait의 try-catch 문을 이용
 		},
 	},
 
+
 ## 사용자 폼 유효성 검사
 
     // src/utils/validate.js
@@ -273,7 +274,8 @@ LoginFrom -> AppHeader
 			this.$router.push('/login');
 		},
 	},
-    ㄹ
+
+# 
 
 # 토큰을 이용한 API 인증 처리 
 
