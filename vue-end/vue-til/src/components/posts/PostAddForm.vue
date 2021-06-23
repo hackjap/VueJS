@@ -3,6 +3,7 @@
 		<h1 class="page-header">Create Post</h1>
 		<div class="form-wrapper">
 			<form class="form" @submit.prevent="submitForm">
+				<LoadingSpinner v-if="isLoading"></LoadingSpinner>
 				<div>
 					<label for="title">Title</label>
 					<input id="title" type="text" v-model="title" />
@@ -22,6 +23,7 @@
 </template>
 
 <script>
+import LoadingSpinner from '@/components/common/LoadingSpinner.vue';
 import { createPost } from '@/api/posts';
 export default {
 	data() {
@@ -29,6 +31,7 @@ export default {
 			title: '',
 			contents: '',
 			logMessage: '',
+			isLoading: false,
 		};
 	},
 	computed: {
@@ -39,16 +42,22 @@ export default {
 	methods: {
 		async submitForm() {
 			try {
+				this.isLoading = true;
 				const response = await createPost({
 					title: this.title,
 					contents: this.contents,
 				});
 				console.log(response);
+				this.isLoading = false;
+				this.$router.push('/main');
 			} catch (error) {
 				console.log(error.response.data.message);
 				this.logMessage = error.response.data.message;
 			}
 		},
+	},
+	components: {
+		LoadingSpinner,
 	},
 };
 </script>

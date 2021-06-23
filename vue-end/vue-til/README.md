@@ -383,5 +383,36 @@ export const instance = createInstance();
     function registerUser(userData) {
         return instance.post('signup', userData);
     }
-    
+
     export { registerUser, loginUser };
+
+
+
+
+## 학습 노트 삭제
+
+
+### 삭제 기능 UX 개선 
+
+ - refersh를 통하여 fetchData를 한번 더 리로드 
+ -  ItemPost 객체 업데이트
+ 
+// MainPage.vue
+
+    <PostListItem
+        v-for="postItem in postItems"
+        :key="postItem._id"
+        :postItem="postItem"
+        @refresh="fetchData"
+    ></PostListItem>
+
+// postListItem.vue
+
+	methods: {
+		async deleteItem() {
+			if (confirm('You want to delete it?')) {
+				await deletePost(this.postItem._id);
+				this.$emit('refresh');
+			}
+		},
+	},
