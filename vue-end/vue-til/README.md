@@ -421,7 +421,7 @@ export const instance = createInstance();
 
 ## Dynamic Route Matching(동적 라우트 매칭)
 
-
+https://github.com/joshua1988/vue-til/blob/complete/src/components/common/ToastPopup.vue
 
 ## 데이터 포맷팅
 
@@ -436,3 +436,41 @@ export const instance = createInstance();
 			return new Date(value);
 		},
 	},
+
+## 라우팅 심화
+
+### 라우터 네비게이션 가드
+
+- 공식문서 : https://router.vuejs.org/guide/advanced/navigation-guards.html
+
+- 강의영상 : https://www.inflearn.com/course/vue-js/lecture/17055
+
+
+    // export default new VueRouter
+    const router = new VueRouter({})
+
+    export default router;
+
+- router 변수로 만들어 export 하여 전역으로 사용할 수 있도록 한다.
+
+### 페이지별 인증 권한 설정 
+
+// route/index.js
+
+    	{
+			path: '/main',
+			component: () => import('@/views/Mainpage.vue'),
+			meta: { auth: true },
+		},
+
+    
+    // 이동할 페이지 , 현재 페이지, 다음 페이지로 넘거가도록 호출
+    router.beforeEach((to, from, next) => {
+        if (to.meta.auth && !store.getters.isLogin) {
+            console.log('인증이 필요합니다.');
+            next('/login');
+            return; // 다음 next 호출을 막기위해
+        }
+
+        next();
+    });
