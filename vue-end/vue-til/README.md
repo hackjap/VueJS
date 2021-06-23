@@ -284,3 +284,45 @@ LoginFrom -> AppHeader
 ## 엑시오스 인터셉터 
 
 - 엑시오스 인터셉터 문서 : https://github.com/axios/axios#interceptors
+
+
+
+## 브라우저 저장소를 통한 인증 값 관리 
+
+ 기존 state를 통해 로그인 세션을 관리할 시 새로고침을 하면 세션을 유지할 수 없었다.
+ 따라서 브라우저 저장소 중 쿠키를 이용하여 데이터(토큰,username)을 저장 
+
+// utils/cookes.js 
+
+    function saveAuthToCookie(value) {
+        document.cookie = `til_auth=${value}`;
+    }
+
+// loginForm.vue
+
+    const { data } = await loginUser(userData);
+            console.log(data.token);
+            this.$store.commit('setToken', data.token);
+            this.$store.commit('setUsername', data.user.username);
+            saveAuthToCookie(data.token);
+            saveUserToCookie(data.user.username);
+
+### Action 속성을 이용한 로그인 기능 구현과 비동기 처리 
+
+ //loginForm.vue
+
+	    await this.$store.dispatch('LOGIN', userData);
+
+ //store/index.js
+
+        actions: {
+        async LOGIN({ commit }, userData) {
+            const { data } = await loginUser(userData);
+            console.log(data.token);
+            commit('setToken', data.token);
+            commit('setUsername', data.user.username);
+            saveAuthToCookie(data.token);
+            saveUserToCookie(data.user.username);
+            return data;
+        },
+    },
