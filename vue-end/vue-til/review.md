@@ -15,7 +15,7 @@
 
 ## 3. 뷰 라우터 및 컴포넌트 설계
 
-- `<router-link>`
+- `<rㄹouter-link>`
 - `<router-view>`
 - `mode: history`와 서버 배포시 주의 사항
 - 코드 스플리팅 `component: () => import('경로')`

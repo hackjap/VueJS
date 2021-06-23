@@ -359,3 +359,29 @@ LoginFrom -> AppHeader
     <p class="validation-text warning" v-if="!isContentsValid">
 						Contents length must be less than 200
 					</p>
+
+
+
+## API 함수 모듈화
+
+// api/index.js
+
+    function createInstance() {
+	return axios.create({
+		baseURL: process.env.VUE_APP_API_URL,
+	});
+}
+
+export const instance = createInstance();
+
+// api/auth.js
+
+    // 로그인, 회원가입, 회원 탈퇴
+    import { instance } from '@/api/index';
+
+    // 회원가입 API
+    function registerUser(userData) {
+        return instance.post('signup', userData);
+    }
+    
+    export { registerUser, loginUser };
