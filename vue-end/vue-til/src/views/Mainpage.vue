@@ -2,15 +2,19 @@
 	<div>
 		<div class="main list-container contents">
 			<h1 class="page-header">Today I Learned</h1>
+
+			<LoadingSpinner v-if="isLoading"></LoadingSpinner>
+			<ul v-else>
+				<PostListItem
+					v-for="postItem in postItems"
+					:key="postItem._id"
+					:postItem="postItem"
+				></PostListItem>
+			</ul>
 		</div>
-		<LoadingSpinner v-if="isLoading"></LoadingSpinner>
-		<ul v-else class="post-box">
-			<PostListItem
-				v-for="postItem in postItems"
-				:key="postItem._id"
-				:postItem="postItem"
-			></PostListItem>
-		</ul>
+		<router-link to="/add" class="create-button">
+			<i class="ion-md-add"></i>
+		</router-link>
 	</div>
 </template>
 
@@ -43,8 +47,4 @@ export default {
 };
 </script>
 
-<style>
-.post-box {
-	background-color: burlywood;
-}
-</style>
+<style></style>

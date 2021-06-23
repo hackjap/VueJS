@@ -326,3 +326,36 @@ LoginFrom -> AppHeader
             return data;
         },
     },
+
+
+## 학습 노트 데이터 생성
+
+### 에러처리 
+
+    		async submitForm() {
+			try {
+				const response = await createPost({
+					title: this.title,
+					contents: this.contents,
+				});
+				console.log(response);
+			} catch (error) {
+				console.log(error.response.data.message);
+				this.logMessage = error.response.data.message;
+			}
+		},
+
+        <p class="log">{{ logMessage }}</p>
+
+
+ ### 유효성 검사
+    
+    computed: {
+		isContentsValid() {
+			return this.contents.length <= 200;
+		},
+	},
+
+    <p class="validation-text warning" v-if="!isContentsValid">
+						Contents length must be less than 200
+					</p>
