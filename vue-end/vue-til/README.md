@@ -420,3 +420,19 @@ export const instance = createInstance();
 ### 학습 노트 데이터 수정 
 
 ## Dynamic Route Matching(동적 라우트 매칭)
+
+
+
+## 데이터 포맷팅
+
+## 뷰 필터 소개 
+
+- 공식문서 : https://vuejs.org/v2/guide/filters.html#ad
+
+    {{ postItem.createdAt | formatDate }}
+
+    filters: {
+		formatDate(value) {
+			return new Date(value);
+		},
+	},
