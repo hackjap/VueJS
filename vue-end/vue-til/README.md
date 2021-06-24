@@ -474,3 +474,41 @@ https://github.com/joshua1988/vue-til/blob/complete/src/components/common/ToastP
 
         next();
     });
+
+
+### 프론트엔드 테스팅 소개
+
+// package.json
+    "test:unit": "vue-cli-service test:unit",
+
+    "test:unit": "vue-cli-service test:unit",
+
+
+
+### 테스트 코드의 목적
+
+- 일일이 기능을 손으로 확인하는 시간을 줄여줌
+
+### JEST
+자바스크립트 testing framework
+State of JS 2019 테스팅 : https://2019.stateofjs.com/testing/
+Jest 공식 사이트 : https://jestjs.io/
+
+
+describe() : 연관된 테스트 케이스를 그룹화하는 API 
+test() : 하나의 테스트 케이스를 검증하는 API 
+
+npm t : 
+
+// loginForm.spec.js
+    import { sum } from '@/components/math';
+
+    sum(10, 20);
+
+    describe('math.js', () => {
+        test('10 + 20 = 30', () => {
+            const result = sum(10, 20);
+            expect(result).toBe(30);
+            // expect(result).not.toBe(30);
+        });
+    });
