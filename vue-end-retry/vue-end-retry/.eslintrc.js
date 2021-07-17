@@ -12,6 +12,8 @@ module.exports = {
   // 코드 정리 플러그인 추가
   plugins: ['prettier'],
   // 사용자 편의 규칙 추가
+
+
   rules: {
     'prettier/prettier': [
       'error',
@@ -20,7 +22,7 @@ module.exports = {
       {
         singleQuote: true,
         semi: true,
-        useTabs: true,
+        useTabs: false,
         tabWidth: 2,
         trailingComma: 'all',
         printWidth: 80,
@@ -36,4 +38,9 @@ module.exports = {
     "amd": true,
     "node": true
 	},
+parserOptions: {
+  parser: 'babel-eslint',
+  sourceType: 'module',
+  allowImportExportEverywhere: true
+}
 };

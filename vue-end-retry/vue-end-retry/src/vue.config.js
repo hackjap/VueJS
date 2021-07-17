@@ -1,5 +1,5 @@
 module.export = {
-	devServer: {
-		overlay: false,
-	},
+  devServer: {
+    overlay: false,
+  },
 };
