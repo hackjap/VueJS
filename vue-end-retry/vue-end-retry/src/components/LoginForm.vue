@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import { loginUser } from '@/api/index';
 import { validateEmail } from '@/utils/validation';
+
 export default {
   data() {
     return {
@@ -53,10 +53,8 @@ export default {
           username: this.username,
           password: this.password,
         };
-        const { data } = await loginUser(userData);
-        console.log(data);
-        // Commit -> mutation - store 값 변경하기
-        this.$store.commit('setUsername', data.user.username);
+        // actions 의 동작을 호출(데이터 응답 후 $router.push를 위해 비동기로 한번 더 처리 )
+        await this.$store.dispatch('LOGIN', userData);
         this.$router.push('/main');
       } catch (error) {
         // 에러 핸들링할 코드

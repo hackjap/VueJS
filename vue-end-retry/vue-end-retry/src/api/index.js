@@ -1,20 +1,23 @@
 import axios from 'axios';
+import { setInterceptors } from './common/interceptors';
 
-// ** API 공통화 **
-const instance = axios.create({
-  baseURL: process.env.VUE_APP_API_URL,
-});
-
-/**
- *  로그인/회원가입
- */
-
-function registerUser(userData) {
-  return instance.post('signup', userData);
+function createInstance() {
+  return axios.create({
+    baseURL: process.env.VUE_APP_API_URL,
+  });
 }
 
-function loginUser(userData) {
-  return instance.post('login', userData);
+// 엑시오스 초기화 함수
+function createInstanceWithAuth(url) {
+  const instance = axios.create({
+    baseURL: `${process.env.VUE_APP_API_URL}${url}`,
+  });
+
+  return setInterceptors(instance);
 }
 
-export { registerUser, loginUser };
+const instance = createInstance();
+
+const posts = createInstanceWithAuth('posts');
+
+export { instance, posts };
