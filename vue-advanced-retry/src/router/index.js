@@ -8,18 +8,23 @@ export const router = new VueRouter({
 	routes: [
 		{
 			path: '/news',
+			name: 'news',
 			component: () => import('@/views/NewsView'),
 		},
 		{
 			path: '/ask',
+			name: 'ask',
 			component: () => import('@/views/AskView'),
 		},
 		{
 			path: '/jobs',
+			name: 'jobs',
+
 			component: () => import('@/views/JobsView'),
 		},
 		{
 			path: '/user/:id',
+
 			component: () => import('@/views/UserView'),
 		},
 		{
