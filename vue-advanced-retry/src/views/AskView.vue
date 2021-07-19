@@ -6,14 +6,6 @@
 import ListItem from '../components/ListItem.vue';
 export default {
 	components: { ListItem },
-	// created() {
-	// 	this.$store.dispatch('FETCH_ASK');
-	// },
-
-	// computed: {
-	// 	// 1. mapGetters를 이용
-	// 	...mapGetters(['fetchedAsk']),
-	// },
 };
 </script>
 

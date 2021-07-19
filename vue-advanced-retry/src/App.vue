@@ -20,7 +20,7 @@ export default {
 <style>
 body {
 	padding: 0;
-	marign: 0;
+	margin: 0;
 }
 a {
 	text-decoration: 0;
