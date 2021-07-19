@@ -1,6 +1,8 @@
 // 학습 노트 조작과 관련된 CRUD API 함수파일
 import { posts } from '@/api/index';
 
+//  BASE URL : http://localhost:3080/user';
+
 // 학습 노트 데이터를  목록을 조회하는 API
 function fetchPosts() {
 	return posts.get('/');

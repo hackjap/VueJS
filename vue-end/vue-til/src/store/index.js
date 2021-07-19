@@ -12,7 +12,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	state: {
 		username: getUserFromCookie() || '',
-		token: getAuthFromCookie() || '',
+		token: getAuthFromCookie
+		() || '',
 	},
 	getters: {
 		// comupted와 유사
