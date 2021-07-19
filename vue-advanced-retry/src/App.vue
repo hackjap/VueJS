@@ -1,7 +1,9 @@
 <template>
 	<div>
 		<tool-bar></tool-bar>
-		<router-view></router-view>
+		<transition name="page">
+			<router-view></router-view>
+		</transition>
 	</div>
 </template>
 
@@ -15,4 +17,27 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+body {
+	padding: 0;
+	marign: 0;
+}
+a {
+	text-decoration: 0;
+}
+a:hover {
+	color: #42b883;
+}
+a.router-link-exact-active {
+	text-decoration: underline;
+}
+
+/* 라우터 트랜지션 */
+.page-enter-active,
+.page-leave-active {
+	transition: opacity 0.5s;
+}
+.page-enter, .page-leave-to /* .fade-leave-active below version 2.1.8 */ {
+	opacity: 0;
+}
+</style>

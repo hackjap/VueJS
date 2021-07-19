@@ -8,4 +8,10 @@ export default {
 	fetchedJobs(state) {
 		return state.jobs;
 	},
+	fetchedUser(state) {
+		return state.user;
+	},
+	fetchedItem(state) {
+		return state.item;
+	},
 };

@@ -1,28 +1,4 @@
-<template>
-  <div>
-    <section>
-      <!-- 사용자 정보 -->
-      <user-profile :info="fetchedItem">
-        <div slot="username">{{ fetchedItem.user }}</div>
-        <router-link slot="username" :to="`/user/ ${fetchedItem.user}`">
-        </router-link>
-        <template slot="time">
-          {{ "Posted " + fetchedItem.time_ago }}
-        </template>
-        <div slot="karma"></div>
-      </user-profile>
-    </section>
-    <section>
-      <h2>{{ fetchedItem.title }}</h2>
-    </section>
-    <section>
-      <!-- 질문 댓글 -->
-      <div v-html="fetchedItem.content">
-        <!-- {{fetchedItem.content}} -->
-      </div>
-    </section>
-  </div>
-</template>
+f
 
 <script>
 import { mapGetters } from "vuex";

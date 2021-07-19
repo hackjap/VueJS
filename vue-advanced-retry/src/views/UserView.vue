@@ -1,15 +1,21 @@
 <template>
 	<div>
-		userVIe
+		<p>name : {{ fetchedUser.id }}</p>
+		<p>karma : {{ fetchedUser.karma }}</p>
+		<p>createAt : {{ fetchedUser.created }}</p>
 	</div>
 </template>
 
 <script>
-import axios from 'axios';
+import { mapGetters } from 'vuex';
 export default {
-	async created() {
-		const response = await axios.get('https://api.hnpwa.com/v0/news/1.json');
-		console.log(response);
+	created() {
+		const userName = this.$route.params.id;
+		this.$store.dispatch('FETCH_USER', userName);
+	},
+
+	computed: {
+		...mapGetters(['fetchedUser']),
 	},
 };
 </script>

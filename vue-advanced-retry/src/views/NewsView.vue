@@ -1,20 +1,15 @@
 <template>
 	<div>
-		<p v-for="user in fetchedNews" :key="user.id">
-			<a :href="user.url">{{ user.title }}</a>
-		</p>
+		<list-item />
 	</div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-// import { fetchNewList } from '@/api/index';
+import ListItem from '../components/ListItem.vue';
+
 export default {
-	created() {
-		this.$store.dispatch('FETCH_NEWS');
-	},
-	computed: {
-		...mapGetters(['fetchedNews']),
+	components: {
+		ListItem,
 	},
 };
 </script>
